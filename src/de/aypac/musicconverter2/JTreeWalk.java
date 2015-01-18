@@ -1,4 +1,4 @@
-package musicconverter2;
+package de.aypac.musicconverter2;
 
 import java.io.File;
 import java.io.PrintStream;

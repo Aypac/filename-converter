@@ -1,4 +1,4 @@
-package musicconverter2;
+package de.aypac.musicconverter2;
 
 public class Filter {
 

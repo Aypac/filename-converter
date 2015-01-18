@@ -1,4 +1,4 @@
-package musicconverter2;
+package de.aypac.musicconverter2;
 
 import java.awt.Point;
 import java.util.Hashtable;

@@ -1,6 +1,7 @@
 Written by René Vollmer - http://aypac.de
 
 Support & Quickstart page: http://aypac.de/musicconverter2.0
+Download-Page (German): http://aypac.de/?p=projects#music_conv
 
 This Java Application can recursively rename files with simple rules or with regex rules. Very slim, no install&uninstall - just download and run (and delete file, if you do not like it anymore).
 Tested on Ubuntu & Windows.

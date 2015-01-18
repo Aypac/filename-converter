@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileFilter;
 public class UI extends javax.swing.JFrame {
 
     public Filter[] filters = new Filter[1];
-    private final String VERSION = "3.0b";
+    private final String VERSION = "3.0c";
     final String CHECK_FOR_UPDATE_URL = "http://aypac.de/musicconverter2.0/update.php?v=" + VERSION;
     private String HELP_PAGE = "http://aypac.de/musicconverter2.0/help/";
 
@@ -94,9 +94,7 @@ public class UI extends javax.swing.JFrame {
 
         filterSettingsDialog.setTitle("Edit / Add Filter");
         filterSettingsDialog.setAlwaysOnTop(true);
-        filterSettingsDialog.setMaximumSize(new java.awt.Dimension(600, 170));
         filterSettingsDialog.setMinimumSize(new java.awt.Dimension(430, 170));
-        filterSettingsDialog.setPreferredSize(new java.awt.Dimension(450, 170));
         filterSettingsDialog.setResizable(false);
         filterSettingsDialog.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -187,7 +185,6 @@ public class UI extends javax.swing.JFrame {
         filterManagerDialog.setTitle("Filterlist Manager");
         filterManagerDialog.setAlwaysOnTop(true);
         filterManagerDialog.setMinimumSize(new java.awt.Dimension(340, 275));
-        filterManagerDialog.setPreferredSize(new java.awt.Dimension(340, 290));
 
         scrollPane2.setViewportView(filterlistList);
 
@@ -288,9 +285,7 @@ public class UI extends javax.swing.JFrame {
 
         saveFilterlistDialog.setTitle("Name your filterlist");
         saveFilterlistDialog.setAlwaysOnTop(true);
-        saveFilterlistDialog.setMaximumSize(new java.awt.Dimension(440, 100));
         saveFilterlistDialog.setMinimumSize(new java.awt.Dimension(440, 100));
-        saveFilterlistDialog.setPreferredSize(new java.awt.Dimension(440, 100));
         saveFilterlistDialog.setResizable(false);
 
         filterlistNameField.addActionListener(new java.awt.event.ActionListener() {
@@ -374,9 +369,7 @@ public class UI extends javax.swing.JFrame {
         applyFileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         infoDialog.setTitle("Information");
-        infoDialog.setMaximumSize(new java.awt.Dimension(320, 180));
         infoDialog.setMinimumSize(new java.awt.Dimension(320, 180));
-        infoDialog.setPreferredSize(new java.awt.Dimension(320, 180));
         infoDialog.setResizable(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -975,8 +968,13 @@ public class UI extends javax.swing.JFrame {
 
     private void openWebPage(String url) {
         try {
-            Process r = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
-            r = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler javascript:location.href=' " + url + " ' ");
+            if (java.awt.Desktop.isDesktopSupported()) {
+                java.net.URI urlp = java.net.URI.create(url);
+                java.awt.Desktop.getDesktop().browse(urlp);
+            } else {
+                Process r = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
+                r = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler javascript:location.href=' " + url + " ' ");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
